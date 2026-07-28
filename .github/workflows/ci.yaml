@@ -130,8 +130,9 @@ jobs:
         id: config-buildkite
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          HEAD_REF: ${{ github.event.pull_request.head.ref || github.ref }}
         run: |
-          branch="${{ github.event.pull_request.head.ref || github.ref }}"
+          branch="$HEAD_REF"
           branch="${branch#"refs/heads/"}"
           branch="${branch#"refs/tags/"}"
 
